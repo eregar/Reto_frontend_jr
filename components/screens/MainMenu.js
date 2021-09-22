@@ -1,15 +1,15 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import {Text, View } from 'react-native';
 import DaySelector from '../DaySelector';
+import MenuList from '../FoodList';
 
 const MainMenu = () =>{
     return (
-    <View style={{alignItems: 'center'}}>
-        <Text >main menu</Text>
-        <DaySelector style = {{flex: 1}}/>
-        <ScrollView>
-            <Text >scroll</Text>
-        </ScrollView>
+    <View style={{alignItems: 'center',flex: 1}}>
+        <Text style={{fontFamily: 'Gotham'}} >main menuw</Text>
+        <Text >main menuw</Text>
+        <DaySelector/>
+        <MenuList/>
     </View>
     );
 }

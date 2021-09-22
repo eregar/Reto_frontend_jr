@@ -4,8 +4,9 @@ import { strongYellow } from './ColorPalette';
 
 const DaySelector = () =>{
     const [selected,setSelected] = useState(-1);
-    const dias = ['Dom','Lun','Mar','Mier','Jue','Vie','Sáb'];
+    const dias = ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'];
     const diaDom = 28
+
     return (
     <View style={styles.daySelector}>
         {dias.map((dia,index) => (
@@ -22,12 +23,13 @@ const DaySelector = () =>{
 
 const Day = ({dia, numero, setSelected, selected}) =>{
     
+    //if(selected) alert("it is"+numero+"!");
     return (
     <TouchableOpacity 
     onPress={setSelected}
     style={styles.dayContainer}>
-        <Text style = {styles.buttonText}>{dia}</Text>
-        <View style = {[styles.circleButton, selected? styles.selectedCircle:null]}>
+        <Text style = {styles.buttonText,{fontFamily:'NanumGothic-Regular'}}>{dia}</Text>
+        <View style = {[ selected? styles.selectedCircle:{},styles.circleButton]}>
             <Text style = {[styles.buttonText,{color: selected?'white':'black'}]}>{numero}</Text>
         </View>
     </TouchableOpacity>
@@ -44,7 +46,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'stretch',
         backgroundColor: 'white',
-        paddingHorizontal: '10%'
+        paddingHorizontal: '10%',
+        //flex: 2
     },
     dayContainer: {
         flex: 1,
@@ -54,15 +57,16 @@ const styles = StyleSheet.create({
     circleButton:{
         height: 20,
         width: 20,
-        borderRadius: 20,
         justifyContent: 'center',
         
     },
     selectedCircle:{
-        backgroundColor: strongYellow
+        backgroundColor: strongYellow,
+        borderRadius: 20,
+    },
+    empty: {
+
     }
-
-
 })
 
 export default DaySelector;
