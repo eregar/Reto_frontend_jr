@@ -5,7 +5,8 @@ import {FlatList,
     View, StyleSheet,
     ActivityIndicator,Dimensions,
     TouchableWithoutFeedback } from 'react-native';
-import { buttonGray, weakGray } from './ColorPalette';
+import { buttonGray, strongYellow, weakGray } from './ColorPalette';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const Chips = ({timeChip,categoryChip,setTime,setCategory}) =>{
@@ -28,11 +29,15 @@ const Chips = ({timeChip,categoryChip,setTime,setCategory}) =>{
     return(
         <View>
             <View style={styles.chiplist}>
-                <Chip selectedOption = {timeChip}
+                <Chip icon='time-outline'
+                selectedOption = {timeChip}
                 onPress = {()=>pressed(0,<ClockOptions onSelected = {closeAndSetTime} />)} />
-                <Chip selectedOption = {categoryChip}
-                 onPress = {()=>pressed(1,<CategoryOptions onSelected = {closeAndSetCategory}/>)}/>
-                <Chip selectedOption = 'Platillos' onPress ={() => alert("selecciono platillos!")} />
+                <Chip icon='fast-food-outline'
+                selectedOption = {categoryChip}
+                onPress = {()=>pressed(1,<CategoryOptions onSelected = {closeAndSetCategory}/>)}/>
+                <Chip icon='information-outline'
+                selectedOption = 'Platillos' 
+                onPress ={() => alert("selecciono platillos!")} />
             </View>
             {display==-1? null:<BlackScreen onPress = {()=>setDisplay(-1)}/>}
             {display==-1? null:<OptionsPane opciones={paneOptions}/>}
@@ -48,13 +53,13 @@ const BlackScreen = ({onPress}) =>{
     );
 }
 
-const Chip = ({selectedOption,onPress}) =>{
+const Chip = ({icon,selectedOption,onPress}) =>{
     return(
         <View style={{alignItems:'center'}}>
             <TouchableOpacity 
             style={styles.chipelem}
             onPress={onPress}>
-                <Text >i</Text>
+                <Icon style={{color: strongYellow}} size={20} name={icon}/>
                 <Text >{selectedOption}</Text>
         </TouchableOpacity>
         </View>
@@ -86,7 +91,10 @@ const ClockOptions = ({onSelected}) => {
 
     return (
         <View>
-            <Text style={{ margin: 10 }}>Elige un horario de entrega</Text>
+            <View style={{flexDirection:'row'}}>
+                <Icon style={{color: strongYellow,alignSelf:'center'}} size={20} name='time-outline'/>
+                <Text style={{ margin: 10 }}>Elige un horario de entrega</Text>
+            </View>
             <View>
                 <FlatList style={styles.optionList}
                     renderItem={renderoptions}
@@ -125,7 +133,10 @@ const CategoryOptions = ({onSelected}) =>{
 
     return (
         <View>
-            <Text style={{ margin: 10 }}>Elige un Servicio</Text>
+            <View style={{flexDirection:'row'}}>
+                <Icon style={{color: strongYellow,alignSelf:'center'}} size={20} name='time-outline'/>
+                <Text style={{ margin: 10 }}>Elige un Servicio</Text>
+            </View>
             {loading ? <ActivityIndicator /> :
                 <FlatList style={styles.optionList}
                     renderItem={renderoptions}

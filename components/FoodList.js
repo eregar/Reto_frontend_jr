@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ImageBackground, FlatList, ActivityIndicator} from 'react-native';
 import { weakYellow } from './ColorPalette';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { strongYellow } from './ColorPalette';
 
 const FoodList = ({filter}) =>{
     const [datos,setDatos] = useState([]);
@@ -14,7 +16,7 @@ const FoodList = ({filter}) =>{
             //console.log(json.meals);
             for(let j = 0; j <json.meals.length; j++){
                 let id = json.meals[j].idMeal
-                console.log(id);
+                //console.log(id);
                 promises.push( fetch('https://www.themealdb.com/api/json/v1/1/lookup.php?i='+id)
                 .then((foodvalue) => foodvalue.json())
                 .then((foodjson) => foodjson.meals[0])
@@ -90,7 +92,7 @@ firstTag = tag.split(',')[0];
                 </ImageBackground>
                 </View>
                 <View style={{flexDirection:'row',paddingVertical:5}}>
-                    <Text style={styles.icono}>icon</Text>
+                    <Icon style={styles.icono} size={20} name='time-outline'/>
                     <Text style={styles.precioText}>$ {id}.00</Text>
                 </View>
             </View>
@@ -142,7 +144,9 @@ const styles = StyleSheet.create({
     icono:{
         flex: 1,
         textAlign: 'left',
-        paddingStart: 5
+        paddingStart: 5,
+        color: strongYellow,
+        alignSelf:'center'
     }
 
 })

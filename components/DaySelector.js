@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { strongYellow } from './ColorPalette';
 
 const DaySelector = () =>{
-    const [selected,setSelected] = useState(-1);
+    const [selected,setSelected] = useState(4);
     const dias = ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'];
     const diaDom = 28
 

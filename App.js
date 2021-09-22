@@ -1,19 +1,15 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MainMenu from './components/screens/MainMenu';
 import Carrito from './components/screens/Carrito';
 import Perfil from './components/screens/Perfil';
-import { colorNotSelected, strongYellow } from './components/ColorPalette';
+import { strongYellow } from './components/ColorPalette';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Nav = createBottomTabNavigator();
 
@@ -26,6 +22,18 @@ const App = () => {
       screenOptions = { ({route}) =>({
         tabBarActiveTintColor: strongYellow,
         headerShown: false,
+        tabBarShowLabel: false,
+        tabBarIcon: ({color, size }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = 'grid-outline';
+          } else if (route.name === 'Perfil') {
+            iconName = 'person-circle-outline';
+          }else{
+            iconName = 'cart-outline';
+          }
+          return <Icon name={iconName} size={size} color={color} />;
+        }
         //tabBarInactiveTintColor: colorNotSelected
       })
       }
