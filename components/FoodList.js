@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ImageBackground, FlatList, ActivityIndicator} from 'react-native';
 import { weakYellow } from './ColorPalette';
 
-const FoodList = () =>{
+const FoodList = ({filter}) =>{
     const [datos,setDatos] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const getFoods = async() => {
         try {
-            const filtered = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef');
+            const filtered = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+filter);
             const json = await filtered.json();
             let promises = []
             //console.log(json.meals);
@@ -35,8 +35,9 @@ const FoodList = () =>{
 
     useEffect(() => {
         setLoading(true);
+        //console.log(filter);
         getFoods();
-    },[]);
+    },[filter]);
     
     const renderItem = ({ item }) => (
         <Elemento
@@ -63,7 +64,6 @@ const FoodList = () =>{
     );
 }
 
-//https://www.themealdb.com/api/json/v1/1/lookup.php?i=52968
 const Elemento = ({id,titulo,area,tag,thumb}) =>{
     const image = { uri: thumb };
 
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         
     },
     foodImg:{
-        height: 144,
+        height: 144,//hacer esto una variable dependiente de width
         justifyContent: 'flex-end'
     },
     elementContainer:{
